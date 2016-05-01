@@ -62,4 +62,14 @@ public class testXmlParser {
 		assertEquals(outContent.toString(), msgLine);
 	}
 	
+	@Test
+	public void TestParserWithUnsuportedFormat()
+	{
+		String[] params = {"HTML", "SampleInput.txt", "SampleOutput.txt"};
+		String msgLine = "HTML Format not suported by the parser.\n" + defaultOutput;
+		// Calling main function with all three parameters.
+		XMLParser.main(params);
+		assertEquals(outContent.toString(), msgLine);
+	}
+	
 }
