@@ -18,7 +18,7 @@ import xmlParser.XMLParser;
  * @author Akshay Purohit
  *
  */
-public class testXmlParser {
+public class TestXmlParser {
 
 	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();

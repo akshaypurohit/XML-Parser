@@ -19,6 +19,7 @@ public class XMLParser implements XMLParserInterface {
 
 	@Override
 	public void parse(String SourceFormat, String SourceFileName, String OutputFileName) {
+		// Check if the file format is supported by the parser.
 		if(isSupportedFormat(SourceFormat))
 		{
 			String msgLine = "Parsing "+ SourceFormat +" to XML.\n"
@@ -35,7 +36,7 @@ public class XMLParser implements XMLParserInterface {
 		}
 	}
 
-	
+
 	public static void main(String[] args) {
 		try
 		{
@@ -51,7 +52,7 @@ public class XMLParser implements XMLParserInterface {
 				String SourceFile   = args[1];
 				String OutputFile   = args[2];
 				xp.parse(SourceFormat,SourceFile,OutputFile);
-	
+
 			}
 		}
 		catch(Exception e)
@@ -60,7 +61,4 @@ public class XMLParser implements XMLParserInterface {
 		}
 
 	}
-
-
-
 }
