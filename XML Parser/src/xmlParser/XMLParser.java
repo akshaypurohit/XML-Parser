@@ -10,27 +10,44 @@ public class XMLParser implements XMLParserInterface {
 				+ "TargetFileName : Target file name.\n");
 
 	}
+	private boolean isSupportedFormat(String fmt)
+	{
+		if(fmt.equals("GEDCOM"))
+			return true;
+		return false;
+	}
 
 	@Override
 	public void parse(String SourceFormat, String SourceFileName, String OutputFileName) {
-		String msgLine = "Parsing "+ SourceFormat +" to XML.\n"
-				+ "Source File : " + SourceFileName + "\n"
-				+ "Output File : " + OutputFileName + "\n";
-		System.out.print(msgLine);
+		if(isSupportedFormat(SourceFormat))
+		{
+			String msgLine = "Parsing "+ SourceFormat +" to XML.\n"
+					+ "Source File : " + SourceFileName + "\n"
+					+ "Output File : " + OutputFileName + "\n";
+
+			System.out.print(msgLine);
+		}
+		else 
+		{
+			String msgLine = SourceFormat + " Format not suported by the parser.\n"; 
+			System.out.print(msgLine);
+			displayUsage();
+		}
 	}
+
 	
 	public static void main(String[] args) {
 		try
 		{
-			XMLParser xp = new XMLParser();
 			if(args.length < 3 || args.length > 3)
 			{
 				displayUsage();
 			}
 			else
 			{
+				XMLParser xp = new XMLParser();
 				//Splitting up parameters.
-				String SourceFormat = args[0];
+				String SourceFormat = args[0].toUpperCase();
 				String SourceFile   = args[1];
 				String OutputFile   = args[2];
 				xp.parse(SourceFormat,SourceFile,OutputFile);

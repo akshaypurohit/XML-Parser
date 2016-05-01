@@ -47,7 +47,7 @@ public class testXmlParser {
 	{
 		// Calling main function without any parameters.
 		XMLParser.main(null);
-		assertEquals(outContent.toString(),defaultOutput);
+		assertEquals(defaultOutput, outContent.toString());
 	}
 	
 	@Test
@@ -59,7 +59,19 @@ public class testXmlParser {
 				+ "Output File : SampleOutput.txt\n";
 		// Calling main function with all three parameters.
 		XMLParser.main(params);
-		assertEquals(outContent.toString(), msgLine);
+		assertEquals(msgLine,outContent.toString());
+	}
+	
+	@Test
+	public void TestParserWithThreeParametersLowerCase()
+	{
+		String[] params = {"gedcom", "SampleInput.txt", "SampleOutput.txt"};
+		String msgLine = "Parsing GEDCOM to XML.\n"
+				+ "Source File : SampleInput.txt\n"
+				+ "Output File : SampleOutput.txt\n";
+		// Calling main function with all three parameters.
+		XMLParser.main(params);
+		assertEquals(msgLine,outContent.toString());
 	}
 	
 	@Test
@@ -69,7 +81,7 @@ public class testXmlParser {
 		String msgLine = "HTML Format not suported by the parser.\n" + defaultOutput;
 		// Calling main function with all three parameters.
 		XMLParser.main(params);
-		assertEquals(outContent.toString(), msgLine);
+		assertEquals(msgLine, outContent.toString());
 	}
 	
 }
