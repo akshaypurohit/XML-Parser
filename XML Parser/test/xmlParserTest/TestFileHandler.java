@@ -36,7 +36,27 @@ public class TestFileHandler {
 		expectedContent.add("TestFile Content");
 		FileHandler fh = new FileHandler();
 		ArrayList<String> actualContent = fh.getFileContents("testfile.txt");
-		assertEquals(expectedContent,actualContent);
+		assertEquals(expectedContent.toString(),actualContent.toString());
+	}
+	
+	@Test
+	public void TestToWriteArrayListToFile()
+	{
+		String filename = "testfile.txt";
+		ArrayList<String> content = new ArrayList<String>();
+		content.add("TestFile Content to write");
+		content.add("Line 2");
+		FileHandler fh = new FileHandler();
+		try
+		{
+			fh.writeArrayListToFile(filename, content);
+		}
+		catch(Exception e)
+		{
+			System.out.print(e.getMessage());
+		}
+		ArrayList<String> actualContent = fh.getFileContents("testfile.txt");
+		assertEquals(content.toString(),actualContent.toString());
 	}
 	
 }

@@ -3,9 +3,13 @@
  */
 package xmlParser;
 
-import java.io.File;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.ListIterator;
+
 
 /**
  * @author puraks01
@@ -16,19 +20,38 @@ public class FileHandler {
 	public ArrayList<String> getFileContents(String filename)
 	{
 		ArrayList<String> srcContents = new ArrayList<String>();
-		try
-		{
-			Scanner s = new Scanner(new File(filename));
-			s.useDelimiter(System.getProperty("line.separator"));	
-			while (s.hasNext()){
-				srcContents.add(s.next().toString());
+		BufferedReader br = null;
+
+		try {
+			String sCurrentLine;
+
+			br = new BufferedReader(new FileReader(filename));
+
+			while ((sCurrentLine = br.readLine()) != null) 
+			{
+				srcContents.add(sCurrentLine);
 			}
-			s.close(); 
-		}
-		catch(Exception e)
-		{
-			System.out.print(e.getMessage());
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (br != null)
+					br.close();
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
 		}
 		return srcContents;
+	}
+	
+	public void writeArrayListToFile(String filename, ArrayList<String> content) throws IOException
+	{
+		FileWriter writer = new FileWriter(filename);
+		ListIterator<String> itr = content.listIterator();
+		while(itr.hasNext()) {
+		  writer.write(itr.next() + "\n");
+		}
+		writer.close();
 	}
 }
